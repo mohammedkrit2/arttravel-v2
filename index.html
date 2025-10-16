@@ -14,13 +14,14 @@
         }
 
         :root {
-            --primary: #1a5276; /* Bleu marocain */
-            --secondary: #d35400; /* Orange terre */
-            --accent: #27ae60; /* Vert oasis */
-            --light: #f9f9f9;
-            --dark: #2c3e50;
-            --text: #333333;
+            --primary: #1a365d; /* Bleu foncé inspiré du logo */
+            --secondary: #c53030; /* Rouge brique inspiré du logo */
+            --accent: #d69e2e; /* Or inspiré du logo */
+            --light: #f7fafc;
+            --dark: #2d3748;
+            --text: #2d3748;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
 
         body {
@@ -85,31 +86,64 @@
             text-decoration: none;
             color: var(--dark);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: var(--transition);
+            position: relative;
         }
 
         nav ul li a:hover {
             color: var(--secondary);
         }
 
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
         /* Section Hero */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1543418219-44e30b057fea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1543418219-44e30b057fea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 100px 0;
+            padding: 120px 0;
             text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(26, 54, 93, 0.6), rgba(197, 48, 48, 0.4));
+            z-index: 1;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.2rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             max-width: 700px;
             margin: 0 auto 30px;
         }
@@ -118,19 +152,30 @@
             display: inline-block;
             background-color: var(--secondary);
             color: white;
-            padding: 12px 30px;
+            padding: 14px 32px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
-            transition: all 0.3s;
+            transition: var(--transition);
             border: none;
             cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .btn:hover {
-            background-color: #e67e22;
+            background-color: #e53e3e;
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--primary);
         }
 
         /* Sections générales */
@@ -166,6 +211,7 @@
             max-width: 700px;
             margin: 0 auto;
             color: var(--dark);
+            font-size: 1.1rem;
         }
 
         /* Section Destinations */
@@ -180,11 +226,13 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: transform 0.3s;
+            transition: var(--transition);
+            position: relative;
         }
 
         .destination-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
         }
 
         .destination-img {
@@ -200,6 +248,34 @@
         .destination-info h3 {
             margin-bottom: 10px;
             color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        .destination-info p {
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .destination-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .destination-link:hover {
+            color: var(--primary);
+        }
+
+        .destination-link i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .destination-link:hover i {
+            transform: translateX(5px);
         }
 
         /* Section Services */
@@ -219,11 +295,13 @@
             border-radius: 10px;
             box-shadow: var(--shadow);
             text-align: center;
-            transition: transform 0.3s;
+            transition: var(--transition);
+            border-top: 4px solid var(--secondary);
         }
 
         .service-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         }
 
         .service-icon {
@@ -235,6 +313,7 @@
         .service-card h3 {
             margin-bottom: 15px;
             color: var(--primary);
+            font-size: 1.3rem;
         }
 
         /* Section Galerie */
@@ -249,13 +328,14 @@
             overflow: hidden;
             border-radius: 8px;
             height: 250px;
+            box-shadow: var(--shadow);
         }
 
         .gallery-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 0.5s ease;
         }
 
         .gallery-item:hover .gallery-img {
@@ -271,7 +351,7 @@
             color: white;
             padding: 20px;
             transform: translateY(100%);
-            transition: transform 0.3s;
+            transition: var(--transition);
         }
 
         .gallery-item:hover .gallery-overlay {
@@ -292,6 +372,7 @@
         .contact-info h3 {
             margin-bottom: 20px;
             color: var(--primary);
+            font-size: 1.5rem;
         }
 
         .contact-details {
@@ -307,6 +388,8 @@
         .contact-detail i {
             margin-right: 10px;
             color: var(--secondary);
+            font-size: 1.2rem;
+            margin-top: 3px;
         }
 
         .contact-form .form-group {
@@ -316,10 +399,18 @@
         .contact-form input,
         .contact-form textarea {
             width: 100%;
-            padding: 12px;
+            padding: 12px 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 2px rgba(197, 48, 48, 0.2);
         }
 
         .contact-form textarea {
@@ -343,9 +434,10 @@
 
         .footer-col h3 {
             margin-bottom: 20px;
-            color: var(--secondary);
+            color: var(--accent);
             position: relative;
             padding-bottom: 10px;
+            font-size: 1.3rem;
         }
 
         .footer-col h3::after {
@@ -355,7 +447,7 @@
             left: 0;
             width: 50px;
             height: 2px;
-            background-color: var(--secondary);
+            background-color: var(--accent);
         }
 
         .footer-col ul {
@@ -369,11 +461,12 @@
         .footer-col ul li a {
             color: #bbb;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: var(--transition);
         }
 
         .footer-col ul li a:hover {
-            color: var(--secondary);
+            color: var(--accent);
+            padding-left: 5px;
         }
 
         .social-links {
@@ -390,7 +483,7 @@
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             color: white;
-            transition: all 0.3s;
+            transition: var(--transition);
         }
 
         .social-links a:hover {
@@ -429,8 +522,16 @@
                 font-size: 2.2rem;
             }
 
+            .hero p {
+                font-size: 1.1rem;
+            }
+
             section {
                 padding: 60px 0;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -441,14 +542,8 @@
     <header>
         <div class="container header-container">
             <div class="logo">
-                <div class="logo-img">
-                    <!-- Logo simulé basé sur travel.jpg -->
-                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; font-weight: bold; border-radius: 8px;">
-                        <div style="font-size: 10px;">AGENCE</div>
-                        <div style="font-size: 14px;">RABAT</div>
-                        <div style="font-size: 12px;">TRAVEL</div>
-                    </div>
-                </div>
+                <!-- Logo travel.jpg -->
+                <img src="https://i.imgur.com/9zJ7Z2C.png" alt="Art Travel Rabat" class="logo-img">
                 <div class="logo-text">ART <span>TRAVEL</span> RABAT</div>
             </div>
             <nav>
@@ -468,7 +563,10 @@
         <div class="container">
             <h1>Découvrez la Magie du Maroc</h1>
             <p>Des expériences de voyage authentiques et inoubliables à travers les plus belles villes du Royaume</p>
-            <a href="#destinations" class="btn">Explorez nos offres</a>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="#destinations" class="btn">Explorez nos offres</a>
+                <a href="#contact" class="btn btn-secondary">Contactez-nous</a>
+            </div>
         </div>
     </section>
 
@@ -481,17 +579,19 @@
             </div>
             <div class="destinations-grid">
                 <div class="destination-card">
-                    <img src="https://images.unsplash.com/photo-1549877452-9c387954fbc2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Marrakech" class="destination-img">
+                    <img src="https://images.unsplash.com/photo-1597633425046-08f5110420b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Marrakech" class="destination-img">
                     <div class="destination-info">
                         <h3>Marrakech</h3>
                         <p>La ville rouge et ses souks animés, places historiques et jardins luxuriants.</p>
+                        <a href="#" class="destination-link">Découvrir <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="destination-card">
-                    <img src="https://images.unsplash.com/photo-1558643087-6d4d7c8da5e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fès" class="destination-img">
+                    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fès" class="destination-img">
                     <div class="destination-info">
                         <h3>Fès</h3>
                         <p>La capitale culturelle et spirituelle avec sa médina classée au patrimoine de l'UNESCO.</p>
+                        <a href="#" class="destination-link">Découvrir <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="destination-card">
@@ -499,13 +599,15 @@
                     <div class="destination-info">
                         <h3>Chefchaouen</h3>
                         <p>La perle bleue nichée dans les montagnes du Rif, aux ruelles azur et atmosphère paisible.</p>
+                        <a href="#" class="destination-link">Découvrir <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="destination-card">
-                    <img src="https://images.unsplash.com/photo-1594736797933-d0f1481c7c81?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Essaouira" class="destination-img">
+                    <img src="https://images.unsplash.com/photo-1570077448260-6505f2b17284?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Casablanca" class="destination-img">
                     <div class="destination-info">
-                        <h3>Essaouira</h3>
-                        <p>La cité des alizés, entre plages immenses, médina fortifiée et port de pêche coloré.</p>
+                        <h3>Casablanca</h3>
+                        <p>La métropole économique avec son impressionnante mosquée Hassan II et son front de mer.</p>
+                        <a href="#" class="destination-link">Découvrir <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -539,7 +641,7 @@
                         <i class="fas fa-hotel"></i>
                     </div>
                     <h3>Hébergement de Charme</h3>
-                    <p>Riad authentiques et hôtels soigneusement sélectionnés pour votre séjour.</p>
+                    <p>Riads authentiques et hôtels soigneusement sélectionnés pour votre séjour.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
@@ -547,6 +649,20 @@
                     </div>
                     <h3>Guides Francophones</h3>
                     <p>Accompagnement par des guides locaux expérimentés et passionnés.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Expériences Culinaires</h3>
+                    <p>Découverte de la gastronomie marocaine dans des restaurants authentiques.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Meilleur Prix Garanti</h3>
+                    <p>Des tarifs compétitifs et transparents sans surprises.</p>
                 </div>
             </div>
         </div>
@@ -561,9 +677,9 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Désert marocain" class="gallery-img">
+                    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fès" class="gallery-img">
                     <div class="gallery-overlay">
-                        <h3>Désert du Sahara</h3>
+                        <h3>Fès - Médina</h3>
                     </div>
                 </div>
                 <div class="gallery-item">
@@ -579,21 +695,21 @@
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1558643087-6d4d7c8da5e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fès" class="gallery-img">
+                    <img src="https://images.unsplash.com/photo-1570077448260-6505f2b17284?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Casablanca" class="gallery-img">
                     <div class="gallery-overlay">
-                        <h3>Fès</h3>
+                        <h3>Casablanca</h3>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1549877452-9c387954fbc2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Marrakech" class="gallery-img">
+                    <img src="https://images.unsplash.com/photo-1597633425046-08f5110420b5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Marrakech" class="gallery-img">
                     <div class="gallery-overlay">
                         <h3>Marrakech</h3>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1570077448260-6505f2b17284?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Casablanca" class="gallery-img">
+                    <img src="https://images.unsplash.com/photo-1578632749014-ca77efd052eb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Désert" class="gallery-img">
                     <div class="gallery-overlay">
-                        <h3>Casablanca</h3>
+                        <h3>Désert du Sahara</h3>
                     </div>
                 </div>
             </div>
@@ -632,24 +748,35 @@
                                 <p>contact@arttravelrabat.ma</p>
                             </div>
                         </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <p><strong>Heures d'ouverture:</strong></p>
+                                <p>Lun - Sam: 9h00 - 19h00</p>
+                            </div>
+                        </div>
                     </div>
                     <h3>Suivez-Nous</h3>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 <div class="contact-form">
                     <form>
                         <div class="form-group">
-                            <input type="text" placeholder="Votre nom" required>
+                            <input type="text" placeholder="Votre nom complet" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" placeholder="Votre email" required>
+                            <input type="email" placeholder="Votre adresse email" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="Sujet">
+                            <input type="tel" placeholder="Votre numéro de téléphone">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Sujet de votre message">
                         </div>
                         <div class="form-group">
                             <textarea placeholder="Votre message" required></textarea>
@@ -668,6 +795,11 @@
                 <div class="footer-col">
                     <h3>Art Travel Rabat</h3>
                     <p>Votre partenaire de confiance pour découvrir la beauté et l'authenticité du Maroc à travers des expériences de voyage uniques et mémorables.</p>
+                    <div class="social-links" style="margin-top: 20px;">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
                 </div>
                 <div class="footer-col">
                     <h3>Liens Rapides</h3>
@@ -720,7 +852,7 @@
             });
         });
 
-        // Animation pour les cartes de destination
+        // Animation pour les éléments au défilement
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -749,6 +881,14 @@
             card.style.transform = 'translateY(20px)';
             card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             observer.observe(card);
+        });
+
+        // Observer les éléments de galerie
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(item);
         });
     </script>
 </body>
